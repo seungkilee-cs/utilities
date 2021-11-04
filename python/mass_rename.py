@@ -23,6 +23,7 @@ def main():
         orignial_file_name_list.write(file_name + '\n')
 
         # Specify out_dir
+        # out_dir = {name} + " " + {(year)} + " " + {season_no} + {episode_no} + {file_format}
         out_dir = "DASADA (2021) S01E" + f'{idx+1:02}' + ".mp4"
         src = path.realpath(file_name)
         # Rename
