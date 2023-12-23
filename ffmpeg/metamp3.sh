@@ -41,6 +41,6 @@ do
         ffmpeg -i "$file" -metadata artist="$artist" -metadata title="$title" "${file%.*}_new.${file##*.}"
 
         # Replace the original file with the new file
-        mv "${file%.*}_new.${file##*.}" "$file"
+        # mv "${file%.*}_new.${file##*.}" "$file"
     fi
 done
