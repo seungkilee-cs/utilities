@@ -5,7 +5,7 @@ if [ -d .git ] || git rev-parse --git-dir > /dev/null 2>&1; then
     echo "This is a git repository. The script will run."
 
     # Get the current timestamp
-    timestamp=$(date +"%Y-%m-%d_%H\:%M\:%S")
+    timestamp=$(date +"%Y-%m-%d_%H_%M_%S")
 
     # Create the branch name
     branch_name="automated-backup-$timestamp"
