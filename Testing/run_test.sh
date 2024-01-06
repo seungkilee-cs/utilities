@@ -1,0 +1,1 @@
+./test_remove_brackets.sh -d _testfiles

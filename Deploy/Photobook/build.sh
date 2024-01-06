@@ -8,4 +8,4 @@
 # repo = Photobook-KanemuraMiku
 ##################################################
 
-./create_md.sh -d "1st_photobook_miku" -u "seungkilee-cs" -r "Photobook-KanemuraMiku"
+./create_photobook_md.sh -d "1st_photobook_miku" -u "seungkilee-cs" -r "Photobook-KanemuraMiku"
