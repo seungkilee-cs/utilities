@@ -21,7 +21,7 @@ for file in "$directory"/*; do
     file_name=$(basename "$file")
     extension="${file_name##*.}"
     file_name_without_extension="${file_name%.*}"
-    new_name="${file_name_without_extension}.1080p.h264.v2.$extension"
+    new_name="${file_name_without_extension}.1080p.h264.KOR.$extension"
     if [ "$file_name" != "$new_name" ]; then
       mv "$file" "$directory/$new_name"
       echo "파일 이름이 변경되었습니다: $file -> $directory/$new_name"
