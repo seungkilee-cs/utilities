@@ -1,2 +1,35 @@
+# Mac system
 **/.DS_Store
+
+# Test
 **/_testfiles/**
+
+# Node related
+node_modules/
+npm-debug.log
+yarn-error.log
+package-lock.json
+yarn.lock
+
+# Python related
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pyc
+*.egg
+*.egg-info/
+dist/
+build/
+eggs/
+parts/
+var/
+sdist/
+develop-eggs/
+.installed.cfg
+lib/
+lib64/
+*.egg-info/
+*.egg
+*.log
+*.sqlite

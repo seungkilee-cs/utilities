@@ -1,0 +1,22 @@
+{
+  "name": "smi_to_srt",
+  "version": "1.0.0",
+  "description": "Quick tool to convert all smis in a given directory to srt files.",
+  "main": "smi_to_srt.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "smi",
+    "srt",
+    "subtitle"
+  ],
+  "author": "LeeIsCodingSK",
+  "license": "ISC",
+  "dependencies": {
+    "chardet": "^1.0.0",
+    "subsrt": "^1.0.0",
+    "yargs": "^17.0.1"
+  }
+}
