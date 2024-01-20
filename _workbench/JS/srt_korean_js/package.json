@@ -1,0 +1,25 @@
+{
+  "name": "srt_korean_js",
+  "version": "1.0.0",
+  "description": "converting broken encoding to EUC-KR encoding to properly print readable Korean",
+  "main": "srt_korean.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "encoding",
+    "EUC-KR",
+    "srt",
+    "utf8",
+    "unicode"
+  ],
+  "author": "LeeIsCodingSK",
+  "license": "ISC",
+  "dependencies": {
+    "chardet": "^1.0.0",
+    "fs-extra": "^10.0.0",
+    "iconv-lite": "^0.6.3",
+    "yargs": "^17.3.0"
+  }
+}
