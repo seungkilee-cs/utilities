@@ -29,7 +29,7 @@ async function main(directory) {
 
     // Process each file in the directory
     for (const file of files) {
-        if (file.endsWith('.srt')) {
+        if (file.endsWith('.srt') || file.endsWith('.smi')) {
             const inputFile = path.join(directory, file);
             const outputFile = path.join(directory, 'converted_' + file);
             await convertToKorean(inputFile, outputFile);
@@ -41,7 +41,7 @@ const argv = yargs(hideBin(process.argv))
     .option('d', {
         alias: 'directory',
         type: 'string',
-        description: 'Directory containing .srt files',
+        description: 'Directory containing sub files',
         demandOption: true
     })
     .argv;

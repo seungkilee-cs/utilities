@@ -1,0 +1,5 @@
+Current Directory: dir2
+-----------------------------
+file4.sh
+dir2.txt
+file3.sh

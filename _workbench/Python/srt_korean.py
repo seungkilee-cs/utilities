@@ -45,13 +45,13 @@ def main(directory):
     """
     # Iterate over the files in the directory
     for filename in os.listdir(directory):
-        if filename.endswith('.srt'):
+        if filename.endswith('.srt') or filename.endswith('.smi'):
             input_file = os.path.join(directory, filename)
             output_file = os.path.join(directory, 'converted_' + filename)
             convert_to_korean(input_file, output_file)
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description='Convert the encoding of .srt files to EUC-KR.')
+    parser = argparse.ArgumentParser(description='Convert the encoding of sub files to EUC-KR.')
     parser.add_argument('-d', '--directory', required=True, help='The directory containing .srt files.')
     args = parser.parse_args()
     main(args.directory)
