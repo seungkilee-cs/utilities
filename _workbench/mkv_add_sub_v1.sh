@@ -42,7 +42,7 @@ for mkv_file in *.mkv; do
     mkvmerge -o "$new_file" --language 0:kor "$mkv_file" "$srt_file"
     echo "Added a new subtitle track to: $new_file"
     
-    mkvpropedit "$new_file" --edit track:s10 --set name="Korean" --set language=kor
+    mkvpropedit "$new_file" --edit track:s1 --set name="Korean" --set language=kor
     
     # # Print the subtitle tracks of the new file
     # echo "Subtitle tracks in $new_file:"
