@@ -7,30 +7,14 @@ if [ -d .git ] || git rev-parse --git-dir > /dev/null 2>&1; then
     # Get the current timestamp
     timestamp=$(date +"%Y-%m-%d_%H_%M_%S")
 
-    # Check if there are any changes that have not been staged
-    if [ -z "$(git status --porcelain)" ]; then
-        echo "No new changes to commit. Exiting."
-        exit 1
-    fi
-
-    # Prompt the user for a commit message
-    read -p "Enter commit message: " commit_message
-
-    # Set the commit message, appending the timestamp if empty
-    if [ -z "$commit_message" ]; then
-        commit_message="autodeploy-$timestamp"
-    else
-        commit_message="$commit_message-$timestamp"
-    fi
+    # Create the branch name
+    branch_name="automated-backup-$timestamp"
 
     # Add all changes to git
     git add .
 
     # Commit the changes
-    git commit -m "$commit_message"
-
-    # Create the branch name
-    branch_name="autodeploy-$timestamp"
+    git commit -m "auto deploy script"
 
     # Create a new branch and switch to it
     git checkout -b $branch_name

@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Convert to UTF-8</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        background-color: var(--bg-color);
+        color: var(--text-color);
+        transition: background-color 0.3s, color 0.3s;
+      }
+
+      h1 {
+        margin-top: 30px;
+      }
+
+      input[type="file"] {
+        display: none;
+      }
+
+      label {
+        display: inline-block;
+        padding: 0.625em 1.25em; /* 10px 20px */
+        background-color: #007bff;
+        color: #fff;
+        cursor: pointer;
+        border-radius: 0.3125em; /* 5px */
+        margin-top: 1.25em; /* 20px */
+      }
+
+      button {
+        padding: 0.625em 1.25em; /* 10px 20px */
+        background-color: #28a745;
+        color: #fff;
+        border: none;
+        border-radius: 0.3125em; /* 5px */
+        cursor: pointer;
+        margin-top: 1.25em; /* 20px */
+      }
+
+      button:disabled {
+        background-color: #6c757d;
+        cursor: not-allowed;
+      }
+
+      #fileList {
+        margin-top: 1.25em; /* 20px */
+        text-align: left;
+      }
+
+      /* Dark Theme */
+      body.dark-mode {
+        --bg-color: #222;
+        --text-color: #fff;
+      }
+
+      /* Light Theme */
+      body.light-mode {
+        --bg-color: #fff;
+        --text-color: #222;
+      }
+
+/* Toggle Button */
+.toggle-button {
+  position: fixed;
+  top: 1em;
+  right: 1em;
+  display: flex;
+  align-items: center;
+}
+
+.toggle-button label {
+  position: relative;
+  display: inline-block;
+  width: 0.8em;
+  height: 0.5em;
+  background-color: #ccc;
+  border-radius: 0.725em;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.toggle-button label::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 1em;
+  height: 1em;
+  background-color: #fff; /* Default background color */
+  border-radius: 50%;
+  transition: background-color 0.3s;
+}
+
+.toggle-button label::after {
+  content: "";
+  position: absolute;
+  top: 0.125em;
+  left: 0.125em;
+  width: 1.375em;
+  height: 1.375em;
+  background-color: #fff;
+  border-radius: 50%;
+  transition: transform 0.3s;
+}
+
+.toggle-button input[type="checkbox"] {
+  display: none;
+}
+
+.toggle-button input[type="checkbox"]:checked + label {
+  background-color: #007bff;
+}
+
+.toggle-button input[type="checkbox"]:checked + label::before {
+  background-color: #000; /* Dark theme background color */
+}
+
+.toggle-button.dark-mode label::before {
+  /* Use moon icon class or background image for dark theme */
+  /* Example using class: */
+  content: "";
+  background-image: url('moon-icon.png');
+  background-size: cover;
+}
+
+.toggle-button.light-mode label::before {
+  /* Use sun icon class or background image for light theme */
+  /* Example using class: */
+  content: "";
+  background-image: url('sun-icon.png');
+  background-size: cover;
+}
+
+/* Hover effect */
+.toggle-button label:hover::before {
+  content: attr(data-theme); /* Display current theme on hover */
+  text-align: center;
+  line-height: 1.2;
+  font-size: 0.8em;
+  color: #fff;
+}
+
+      /* 반응형 스타일 */
+      @media screen and (max-width: 768px) {
+        label {
+          padding: 0.5em 1em; /* 8px 16px */
+          font-size: 0.875em; /* 14px */
+        }
+
+        .toggle-button label {
+          width: 2.5em; /* 40px */
+          height: 1.25em; /* 20px */
+        }
+
+        .toggle-button label:after {
+          top: 0.0625em; /* 1px */
+          left: 0.0625em; /* 1px */
+          width: 1.125em; /* 18px */
+          height: 1.125em; /* 18px */
+        }
+      }
+    </style>
+  </head>
+  <body class="light-mode">
+    <h1>Convert to UTF-8</h1>
+
+    <p>
+      이 HTML은 EUC-KR 인코딩에서 UTF-8로 변환하는 예제를 보여줍니다. 이 코드는
+      SRT, SMI, TXT 파일 등을 지원합니다.
+    </p>
+
+    <input type="file" id="fileInput" multiple />
+    <label for="fileInput">파일 선택</label>
+    <button onclick="convertFiles()" disabled>변환하기</button>
+
+    <div id="fileList"></div>
+
+    <!-- Toggle Button -->
+    <div class="toggle-button">
+      <input type="checkbox" id="themeToggle" onchange="toggleTheme()" />
+      <label for="themeToggle"></label>
+    </div>
+
+    <script>
+      const fileInput = document.getElementById("fileInput");
+      const convertButton = document.querySelector("button");
+      const fileListDiv = document.getElementById("fileList");
+      const themeToggle = document.getElementById("themeToggle");
+
+      fileInput.addEventListener("change", function () {
+        convertButton.disabled = fileInput.files.length === 0;
+        updateFileList();
+      });
+
+      function updateFileList() {
+        fileListDiv.innerHTML = "";
+
+        const files = fileInput.files;
+        const fileCount = files.length;
+
+        if (fileCount > 0) {
+          const fileListHeading = document.createElement("h2");
+          fileListHeading.textContent = "Selected Files:";
+          fileListDiv.appendChild(fileListHeading);
+
+          const fileList = document.createElement("ul");
+
+          for (let i = 0; i < fileCount; i++) {
+            const file = files[i];
+            const listItem = document.createElement("li");
+            listItem.textContent = file.name;
+            fileList.appendChild(listItem);
+          }
+
+          fileListDiv.appendChild(fileList);
+
+          const fileCountText = document.createElement("p");
+          fileCountText.textContent = `Total Files: ${fileCount}`;
+          fileListDiv.appendChild(fileCountText);
+        }
+      }
+
+      function convertFiles() {
+        const files = fileInput.files;
+
+        for (let i = 0; i < files.length; i++) {
+          const file = files[i];
+          const reader = new FileReader();
+
+          reader.onload = function (event) {
+            const contents = event.target.result;
+            const convertedContents = convertEncoding(contents);
+
+            const convertedFile = new File(
+              [convertedContents],
+              addSuffixToFileName(file.name, "utf8"),
+              { type: file.type }
+            );
+            downloadFile(convertedFile);
+          };
+
+          reader.readAsArrayBuffer(file);
+        }
+      }
+
+      function convertEncoding(contents) {
+        // Convert from EUC-KR to UTF-8
+        const decoder = new TextDecoder("euc-kr");
+        const encoder = new TextEncoder();
+
+        const decodedData = decoder.decode(new Uint8Array(contents));
+        const encodedData = encoder.encode(decodedData);
+
+        return encodedData;
+      }
+
+      function addSuffixToFileName(fileName, suffix) {
+        const dotIndex = fileName.lastIndexOf(".");
+        const fileNameWithoutExt = fileName.substring(0, dotIndex);
+        const fileExt = fileName.substring(dotIndex);
+
+        return `${fileNameWithoutExt}.${suffix}${fileExt}`;
+      }
+
+      function downloadFile(file) {
+        const downloadLink = document.createElement("a");
+        downloadLink.href = URL.createObjectURL(file);
+        downloadLink.download = file.name;
+        downloadLink.click();
+      }
+
+      function toggleTheme() {
+        const body = document.body;
+        body.classList.toggle("dark-mode");
+        body.classList.toggle("light-mode");
+      }
+    </script>
+  </body>
+</html>
