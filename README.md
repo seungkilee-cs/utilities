@@ -1,4 +1,2 @@
 # Utilities
-Utility scripts or snippets for the web
-
-#
+Utility scripts or snippets
